@@ -9,7 +9,6 @@ public class AcademicFrame extends JFrame {
     private User loggedInUser;
     private String modulName;
 
-    // Komponen Input Sederhana
     private JTextField txtField1 = new JTextField(15);
     private JTextField txtField2 = new JTextField(15);
     private JButton btnSimpan = new JButton("Simpan Data");
@@ -20,11 +19,10 @@ public class AcademicFrame extends JFrame {
 
         setTitle("Kelola Modul: " + modulName);
         setSize(400, 250);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Hanya menutup jendela ini saja
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
         setLocationRelativeTo(null);
         setLayout(new GridLayout(4, 2, 10, 10));
 
-        // Tampilan Form dinamis sesuai tombol yang diklik di dashboard
         JLabel lbl1 = new JLabel("  Nama / Input 1:");
         JLabel lbl2 = new JLabel("  Keterangan / Input 2:");
         
@@ -43,7 +41,6 @@ public class AcademicFrame extends JFrame {
         add(lbl2); add(txtField2);
         add(new JLabel("")); add(btnSimpan);
 
-        // Event Klik Tombol Simpan dengan Validasi Input & Exception Handling (Aturan Dosen!)
         btnSimpan.addActionListener((ActionEvent e) -> {
             prosesSimpan();
         });
@@ -54,12 +51,10 @@ public class AcademicFrame extends JFrame {
         String input2 = txtField2.getText().trim();
 
         try {
-            // 1. VALIDASI INPUT WAJIB (Aturan Dosen: Aplikasi tidak boleh berhenti/crash)
             if (input1.isEmpty() || input2.isEmpty()) {
                 throw new IllegalArgumentException("Semua kolom input wajib diisi!");
             }
 
-            // 2. VALIDASI KHUSUS ANGKA JIKA INPUT NILAI
             if (modulName.contains("Nilai")) {
                 try {
                     int nilai = Integer.parseInt(input2);
@@ -71,12 +66,10 @@ public class AcademicFrame extends JFrame {
                 }
             }
 
-            // Jika validasi lolos, simulasikan penyimpanan (Bisa dikembangkan ke Controller/Repository nanti jika perlu)
             JOptionPane.showMessageDialog(this, "Data " + modulName + " Berhasil Disimpan!\n" + input1 + " - " + input2, "Sukses", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
 
         } catch (IllegalArgumentException ex) {
-            // Menangkap kesalahan input dengan pesan peringatan tanpa membuat aplikasi mati
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Kesalahan Input", JOptionPane.WARNING_MESSAGE);
         }
     }
