@@ -14,14 +14,21 @@ public class LoginFrame extends JFrame {
 
     public LoginFrame() {
         setTitle("Login Sistem Informasi Sekolah");
-        setSize(350, 200);
+        setSize(400, 220); 
+        setResizable(false); // Mengunci ukuran agar tidak melar otomatis
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setLayout(new GridLayout(3, 2, 10, 10));
+        setLocationRelativeTo(null); // Membuat jendela muncul di tengah layar
 
-        add(new JLabel("  Username:")); add(txtUsername);
-        add(new JLabel("  Password:")); add(txtPassword);
-        add(new JLabel("")); add(btnLogin);
+        // Menggunakan FlowLayout agar komponen tidak melar dipaksa penuh
+        setLayout(new FlowLayout(FlowLayout.CENTER, 10, 15)); 
+
+        // Membuat panel bungkus kecil di dalam agar form tersusun rapi
+        JPanel panel = new JPanel(new GridLayout(3, 2, 5, 10));
+        panel.add(new JLabel("Username:")); panel.add(txtUsername);
+        panel.add(new JLabel("Password:")); panel.add(txtPassword);
+        panel.add(new JLabel(""));         panel.add(btnLogin);
+        
+        add(panel);
 
         // Event saat tombol login diklik
         btnLogin.addActionListener((ActionEvent e) -> {
